@@ -1,0 +1,83 @@
+import 'dart:io';
+void main(){
+    List<String> tasks=[];
+    while(true){
+        print('Task Manager');
+       print('1. Add Task');
+       print('2. Delete Task');
+       print('3. View Tasks');
+       print('4. Mark Task as Completed');
+       print('5. Exit');
+       print('Enter your choice:');
+       var choice=int.tryParse(stdin.readLineSync()??'');
+       switch(choice){
+        case 1:
+        addTask(tasks);
+        break;
+        case 2:
+        deleteTask(tasks);
+        break;
+        case 3:
+        viewTasks(tasks);
+        break;
+        case 4:
+        markAsComplete(tasks);
+        break;
+        case 5:
+         print('Exiting Task Manager...');
+         return;
+       }
+    }
+}
+/*addTask start here*/
+void addTask(List<String> tasks){
+    print('Enter the Task Description');
+    var des=stdin.readLineSync()!;
+    tasks.add(des);
+    print('Task Added Successfully');
+}
+/*addTask end here*/
+/*deletTask start here*/
+void deleteTask(List<String> tasks){
+    print('Enter Task Number To Delete:');
+    var taskno=int.parse(stdin.readLineSync()!);
+    if(taskno!=null && taskno>=1&&taskno<=tasks.length){
+        taskno--;
+    tasks.removeAt(taskno);
+    print('Task Delete Successfully');
+    }
+    else{
+        print('Invalid Task number.Please try again...');
+    }
+    }
+/*deletTask end here*/
+/*viewTasks start here*/
+void viewTasks(List<String> tasks){
+    if(tasks.isEmpty){
+        print('No tasks found.');
+    }
+    else{
+        print('Tasks');
+        for(int i=0;i<tasks.length;i++){
+         print('${i+1}. ${tasks[i]}');
+        }
+        print("\n");
+        }
+    }
+/*viewTasks end here*/
+/*markAsComplete start here*/
+void markAsComplete(List<String> tasks){
+    print('Enter the task number to mark as complete:');
+    viewTasks(tasks);
+       var tasknum=int.parse(stdin.readLineSync()!);
+       if(tasknum!=null && tasknum>=1&&tasknum<=tasks.length){
+           tasknum--;
+           tasks[tasknum]='[COMPLETED] ${tasks[tasknum]}';
+           print('Task marked as complete!\n');
+       }
+       else{
+           print('Invalid Task number. Please try again \n');
+       }
+}
+    
+/*markAsComplete end here*/
